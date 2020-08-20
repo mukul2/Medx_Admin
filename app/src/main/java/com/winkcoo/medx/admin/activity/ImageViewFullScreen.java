@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,6 +33,8 @@ public class ImageViewFullScreen extends AppCompatActivity {
         {
             String j =(String) b.get("link");
             Glide.with(context).load(IMAGE_BASE + j).into(img);
+            Toast.makeText(context, j, Toast.LENGTH_SHORT).show();
+
 
 
         }

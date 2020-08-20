@@ -71,6 +71,8 @@ public class PendingTransactionsFragment extends Fragment {
             public void onChanged() {
                 list.clear();
                 loadAndShow();
+
+
             }
         });
 
@@ -90,7 +92,7 @@ public class PendingTransactionsFragment extends Fragment {
                         JSONObject object = array.getJSONObject(i);
                         JSONObject p = object.getJSONObject("patient_info");
                         // JsonElement patientEle = object.get("patient_info");
-                        list.add(new PendingTransModel(object.getInt("id"),p.get("name").toString(), object.get("created_at").toString(), object.get("full_fees").toString(), object.get("trans_id").toString(),object.get("trans_id_img").toString()));
+                        list.add(new PendingTransModel(object.getInt("id"),p.get("id").toString(),p.get("name").toString(), object.get("created_at").toString(), object.get("full_fees").toString(), object.get("trans_id").toString(),object.get("trans_id_img").toString()));
                         mAdapter.notifyDataSetChanged();
                     }
 

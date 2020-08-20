@@ -15,8 +15,8 @@ import java.util.Map;
 public class data {
     public  static CommonUserModel commonUserModel;
     public  static LoginResponse loginResponse;
-    public  static String IMAGE_BASE="http://telemedicine.drshahidulislam.com/";
-    public  static String CURRENCY_USD_SIGN=" $";
+    public  static String IMAGE_BASE="http://medx.winkcoo.com/";
+    public  static String CURRENCY_USD_SIGN=" Rs";
     public  static boolean NEED_TO_SHOW_PENDINGS_FRAG= false;
     public  static String TOKEN;
     public  static int MY_ID;

@@ -2,19 +2,37 @@ package com.winkcoo.medx.admin.model;
 
 public class PendingTransModel {
     int id;
+    String pid;
     String name ;
     String date;
     String amount;
     String payment_details;
     String img;
 
-    public PendingTransModel(int id, String name, String date, String amount, String payment_details, String i) {
+    public PendingTransModel(int id, String pid, String name, String date, String amount, String payment_details, String img) {
         this.id = id;
+        this.pid = pid;
         this.name = name;
         this.date = date;
         this.amount = amount;
         this.payment_details = payment_details;
-        this.img = i;
+        this.img = img;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public int getId() {

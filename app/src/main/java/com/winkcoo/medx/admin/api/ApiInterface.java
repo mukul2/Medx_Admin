@@ -92,7 +92,8 @@ public interface ApiInterface {
     @GET("serviceNameRate")
     Call<List<ServiceNameRate>> getServiceNameRate(@Header("Authorization") String s);
     @POST("send")
-    Call<NotificationResponse> newmsg(@Header("Authorization") String s, @Body NotiModel model);
+    Call<NotificationResponse> newmsg(@Header("Authorization") String s, @Body NotiModel model); @POST("send")
+    Call<JsonElement> newNoti(@Header("Authorization") String s, @Body NotiModel model);
     @FormUrlEncoded
     @POST("login")
     Call<LoginResponse> login(@Field("email") String mobile,

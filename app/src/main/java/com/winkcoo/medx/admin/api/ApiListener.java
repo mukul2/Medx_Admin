@@ -37,7 +37,11 @@ public class ApiListener {
 
         void onSettingUpdateFailed(String msg);
     }
+    public interface NotificationSentListener {
+        void onNotificationSentSuccess(JsonElement status);
 
+        void onNotificationSentFailed(String msg);
+    }
     public interface PaymentListDownloadListener {
         void onPaymentListDownloadSuccess(AllCollectionWithdraModel response);
 

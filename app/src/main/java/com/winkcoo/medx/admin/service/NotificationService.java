@@ -14,20 +14,19 @@ import static com.winkcoo.medx.admin.service.AsyncTask.returnBitmap;
 public class NotificationService extends FirebaseMessagingService {
     public NotificationService() {
     }
-
+    String title = "No title";
+    String body ="No Body";
+    String intent = "no";
+    String targetUserType = "no";
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        Log.i("noti",remoteMessage.getData().toString());
 
         NotificationHelper notificationHelper = new NotificationHelper(NotificationService.this);
-        String title = remoteMessage.getData().get("title").toString();
-        String body = remoteMessage.getData().get("body").toString();
-        String intent = remoteMessage.getData().get("intent").toString();
-        String targetUserType = remoteMessage.getData().get("targetUserType").toString();
-        SessionManager sessionManager=new SessionManager(NotificationService.this);
-
-
+        title = remoteMessage.getData().get("title").toString();
+        body = remoteMessage.getData().get("body").toString();
+        intent = remoteMessage.getData().get("intent").toString();
+        targetUserType = remoteMessage.getData().get("targetUserType").toString();
        if (true) {
 
            if (remoteMessage.getData().get("image") != null && remoteMessage.getData().get("image").length() > 0) {

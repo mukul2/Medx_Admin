@@ -14,9 +14,10 @@ import android.provider.Settings;
 
 import androidx.core.app.NotificationCompat;
 
-import com.winkcoo.medx.admin.MainActivity;
+
 import com.winkcoo.medx.admin.R;
 import com.winkcoo.medx.admin.Utils.SessionManager;
+import com.winkcoo.medx.admin.activity.MainActivity;
 import com.winkcoo.medx.admin.data.data;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -50,10 +51,10 @@ public class NotificationHelper {
         if (true) {
 
             String message = "";
-            //NEED_TO_SHOW_PENDINGS_FRAG = false ;
-            data.NEED_TO_SHOW_PENDINGS_FRAG =  false ;
+
 
             switch (intent) {
+
                 case "pending_payment": {
                     resultIntent = new Intent(mContext, MainActivity.class);
                     data.NEED_TO_SHOW_PENDINGS_FRAG =  true ;
@@ -62,34 +63,12 @@ public class NotificationHelper {
                     title = title;
                     break;
                 }
-                case "chat": {
-                   // resultIntent = new Intent(mContext, ChatListActivity.class);
-                    message = body;
-                    title = title;
-                    break;
-                }
-                case "appointment": {
-                    if (targetUserType.equals("d")) {
-                       // resultIntent = new Intent(mContext, DrPendingActivity.class);
-                        message = body;
-                        title = title;
-                    } else {
-
-                    }
-                  /*  resultIntent = new Intent(mContext, PendingJobsByLevel1AdminActivity.class);
-                    message = "Appointment Information";
-                    title = "Appointment update";
-
-                   */
-                    break;
-                }
-
                 default: {
                     resultIntent = new Intent(mContext, MainActivity.class);
 
                 }
             }
-              resultIntent = new Intent(mContext, MainActivity.class);
+            //  resultIntent = new Intent(mContext, SplashActivity.class);
 
 
             resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -158,142 +137,142 @@ public class NotificationHelper {
         }
     }
 
-//    public static void newMsgNotification(Context context, String sender, String msgBody, Bitmap bitmap) {
-//
-//        String CHANNEL_ID = "my_channel_01";
-//        CharSequence name = "my_channel";
-//        String Description = "This is my channel";
-//
-//        int NOTIFICATION_ID = 234;
-//
-//
-//        NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-//
-//
-//        if (false) {
-//
-//           /*
-//
-//
-//            int importance = NotificationManager.IMPORTANCE_MAX;
-//            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_HIGH);
-//            mChannel.setDescription(Description);
-//            mChannel.enableLights(true);
-//            mChannel.setLightColor(Color.RED);
-//            mChannel.enableVibration(true);
-//            AudioAttributes att = new AudioAttributes.Builder()
-//                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
-//                    .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-//                    .build();
-//            mChannel.setSound(Uri.parse("android.resource:// ukilchai.limited.com/" + R.raw.iphn),att);
-//
-//
-//            mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-//            mChannel.setShowBadge(true);
-//
-//            if (notificationManager != null) {
-//
-//                notificationManager.createNotificationChannel(mChannel);
-//            }
-//            */
-//            NotificationManager mNotificationManager;
-//            NotificationCompat.Builder mBuilder;
-//            String NOTIFICATION_CHANNEL_ID = "10001";
-//            Intent resultIntent = new Intent(context, SplashActivity.class);
-//            resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//
-//            PendingIntent resultPendingIntent = PendingIntent.getActivity(context,
-//                    0 /* Request code */, resultIntent,
-//                    PendingIntent.FLAG_UPDATE_CURRENT);
-//            mBuilder = new NotificationCompat.Builder(context);
-//            mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-//            mBuilder.setContentTitle("sss")
-//                    .setContentText(msgBody)
-//                    .setAutoCancel(false)
-//
-//                    .setContentIntent(resultPendingIntent);
-//
-//            mNotificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-//
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                {
-//                    int importance = NotificationManager.IMPORTANCE_HIGH;
-//                    NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "NOTIFICATION_CHANNEL_NAME", importance);
-//                    notificationChannel.enableLights(true);
-//                    notificationChannel.setLightColor(Color.RED);
-//                    notificationChannel.enableVibration(true);
-//                    notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-//                    assert mNotificationManager != null;
-//                    mBuilder.setChannelId(NOTIFICATION_CHANNEL_ID);
-//                    mNotificationManager.createNotificationChannel(notificationChannel);
-//                }
-//                assert mNotificationManager != null;
-//                mNotificationManager.notify(0 /* Request Code */, mBuilder.build());
-//            } else {
-//                NotificationCompat.Builder builder =
-//                        new NotificationCompat.Builder(context)
-//                                .setSmallIcon(R.drawable.ap_ic2)//set icon for notification
-//                                .setContentTitle("Notifications Example") //set title of notification
-//                                .setContentText("This is a notification message")//this is notification message
-//                                .setAutoCancel(true) // makes auto cancel of notification
-//                                .setPriority(NotificationCompat.PRIORITY_DEFAULT); //set priority of notification
-//
-//
-//                Intent notificationIntent = new Intent(context, SplashActivity.class);
-//                notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                //notification message will get at NotificationView
-//                // notificationIntent.putExtra(, "This is a notification message");
-//
-//                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent,
-//                        PendingIntent.FLAG_UPDATE_CURRENT);
-//                builder.setContentIntent(pendingIntent);
-//
-//                // Add as notification
-//                NotificationManager manager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-//                manager.notify(0, builder.build());
-//
-//            }
-//
-//
-///*
-//
-//            final Uri alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
-//                    + "://" + context.getPackageName() + "/raw");
-//            Intent resultIntent1 = new Intent(context, SplashActivity.class);
-//            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-//            stackBuilder.addParentStack(SplashActivity.class);
-//            stackBuilder.addNextIntent(resultIntent);
-//            PendingIntent resultPendingIntent1 = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//
-//            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-//                    .setContentTitle(sender)
-//                    .setContentText(sender)
-//                    .setStyle(new NotificationCompat.BigTextStyle().bigText(msgBody))
-//                    .setSmallIcon(R.drawable.leaf)
-//                    .setLargeIcon(bitmap)
-//                    .setPriority(NotificationCompat.PRIORITY_MAX)
-//                    .setContentIntent(resultPendingIntent1)
-//                    .setAutoCancel(true)
-//
-//
-//                    .setSound(alarmSound)
-//                    .setColor(context.getResources().getColor(R.color.colorPrimary));
-//
-//
-//            if (notificationManager != null) {
-//
-//
-//                notificationManager.notify(NOTIFICATION_ID, builder.build());
-//            }
-//
-// */
-//
-//
-//        }
-//
-//
-//    }
+    public static void newMsgNotification(Context context, String sender, String msgBody, Bitmap bitmap) {
+
+        String CHANNEL_ID = "my_channel_01";
+        CharSequence name = "my_channel";
+        String Description = "This is my channel";
+
+        int NOTIFICATION_ID = 234;
+
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+
+
+        if (false) {
+
+           /*
+
+
+            int importance = NotificationManager.IMPORTANCE_MAX;
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_HIGH);
+            mChannel.setDescription(Description);
+            mChannel.enableLights(true);
+            mChannel.setLightColor(Color.RED);
+            mChannel.enableVibration(true);
+            AudioAttributes att = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                    .build();
+            mChannel.setSound(Uri.parse("android.resource:// ukilchai.limited.com/" + R.raw.iphn),att);
+
+
+            mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            mChannel.setShowBadge(true);
+
+            if (notificationManager != null) {
+
+                notificationManager.createNotificationChannel(mChannel);
+            }
+            */
+            NotificationManager mNotificationManager;
+            NotificationCompat.Builder mBuilder;
+            String NOTIFICATION_CHANNEL_ID = "10001";
+            Intent resultIntent = new Intent(context, MainActivity.class);
+            resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            PendingIntent resultPendingIntent = PendingIntent.getActivity(context,
+                    0 /* Request code */, resultIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+            mBuilder = new NotificationCompat.Builder(context);
+            mBuilder.setSmallIcon(R.mipmap.ic_launcher);
+            mBuilder.setContentTitle("sss")
+                    .setContentText(msgBody)
+                    .setAutoCancel(false)
+
+                    .setContentIntent(resultPendingIntent);
+
+            mNotificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                {
+                    int importance = NotificationManager.IMPORTANCE_HIGH;
+                    NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "NOTIFICATION_CHANNEL_NAME", importance);
+                    notificationChannel.enableLights(true);
+                    notificationChannel.setLightColor(Color.RED);
+                    notificationChannel.enableVibration(true);
+                    notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+                    assert mNotificationManager != null;
+                    mBuilder.setChannelId(NOTIFICATION_CHANNEL_ID);
+                    mNotificationManager.createNotificationChannel(notificationChannel);
+                }
+                assert mNotificationManager != null;
+                mNotificationManager.notify(0 /* Request Code */, mBuilder.build());
+            } else {
+                NotificationCompat.Builder builder =
+                        new NotificationCompat.Builder(context)
+                                .setSmallIcon(R.drawable.ap_ic2)//set icon for notification
+                                .setContentTitle("Notifications Example") //set title of notification
+                                .setContentText("This is a notification message")//this is notification message
+                                .setAutoCancel(true) // makes auto cancel of notification
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT); //set priority of notification
+
+
+                Intent notificationIntent = new Intent(context, MainActivity.class);
+                notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //notification message will get at NotificationView
+                // notificationIntent.putExtra(, "This is a notification message");
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+                builder.setContentIntent(pendingIntent);
+
+                // Add as notification
+                NotificationManager manager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+                manager.notify(0, builder.build());
+
+            }
+
+
+/*
+
+            final Uri alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
+                    + "://" + context.getPackageName() + "/raw");
+            Intent resultIntent1 = new Intent(context, SplashActivity.class);
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+            stackBuilder.addParentStack(SplashActivity.class);
+            stackBuilder.addNextIntent(resultIntent);
+            PendingIntent resultPendingIntent1 = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                    .setContentTitle(sender)
+                    .setContentText(sender)
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(msgBody))
+                    .setSmallIcon(R.drawable.leaf)
+                    .setLargeIcon(bitmap)
+                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                    .setContentIntent(resultPendingIntent1)
+                    .setAutoCancel(true)
+
+
+                    .setSound(alarmSound)
+                    .setColor(context.getResources().getColor(R.color.colorPrimary));
+
+
+            if (notificationManager != null) {
+
+
+                notificationManager.notify(NOTIFICATION_ID, builder.build());
+            }
+
+ */
+
+
+        }
+
+
+    }
 
 
 }

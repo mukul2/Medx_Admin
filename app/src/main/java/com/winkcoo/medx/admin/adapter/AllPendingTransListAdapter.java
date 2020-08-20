@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.JsonElement;
 import com.winkcoo.medx.admin.R;
 import com.winkcoo.medx.admin.Utils.MyProgressBar;
 import com.winkcoo.medx.admin.activity.ImageViewFullScreen;
@@ -85,7 +86,7 @@ public class AllPendingTransListAdapter extends RecyclerView.Adapter<AllPendingT
         holder.tv_name.setText("P. Name : " + movie.getName() );
         holder.tv_payment_details.setText("Trans ID : " + movie.getPayment_details() );
         holder.tv_amount.setText("" + movie.getAmount()+CURRENCY_USD_SIGN );
-        if (movie.getType()!=null) {
+        if (movie.getType()!=null&&movie.getType().length()>0 &&movie.getType().equals("null")) {
             holder.tv_type.setText("View Photos" );
             holder.tv_type.setTextColor(context.getResources().getColor(R.color.colorPrimary));
             holder.tv_type.setOnClickListener(new View.OnClickListener() {
@@ -109,8 +110,22 @@ public class AllPendingTransListAdapter extends RecyclerView.Adapter<AllPendingT
                     @Override
                     public void onBasicAPISuccess(StatusMessage response) {
                         MyProgressBar.dismiss();
-                        Toast.makeText(context,response.getMessage(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context,response.getMessage(), Toast.LENGTH_SHORT).show();
                         onStateChange.onChanged();
+
+                        Api.getInstance().appNotification(movie.getPid(), "Payment Confirmed", "Your pending transaction has been verified", "pending_payment", null, "a", new ApiListener.NotificationSentListener() {
+                            @Override
+                            public void onNotificationSentSuccess(JsonElement status) {
+                                Toast.makeText(context, ""+status.toString(), Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            @Override
+                            public void onNotificationSentFailed(String msg) {
+                                //  Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
                     }
 
                     @Override
