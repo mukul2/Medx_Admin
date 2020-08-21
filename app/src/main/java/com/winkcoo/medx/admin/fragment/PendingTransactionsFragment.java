@@ -91,8 +91,11 @@ public class PendingTransactionsFragment extends Fragment {
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
                         JSONObject p = object.getJSONObject("patient_info");
+                        JSONObject d = object.getJSONObject("dr_info");
+
                         // JsonElement patientEle = object.get("patient_info");
-                        list.add(new PendingTransModel(object.getInt("id"),p.get("id").toString(),p.get("name").toString(), object.get("created_at").toString(), object.get("full_fees").toString(), object.get("trans_id").toString(),object.get("trans_id_img").toString()));
+                        Toast.makeText(context, object.get("trans_id_img").toString(), Toast.LENGTH_SHORT).show();
+                        list.add(new PendingTransModel(object.getInt("id"),p.get("id").toString(),p.get("name").toString(), d.get("id").toString(),object.get("created_at").toString(), object.get("full_fees").toString(), object.get("trans_id").toString(),object.get("trans_id_img").toString(),object.getString("service_details").toString()));
                         mAdapter.notifyDataSetChanged();
                     }
 

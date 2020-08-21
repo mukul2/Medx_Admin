@@ -86,8 +86,9 @@ public class AllPendingTransListAdapter extends RecyclerView.Adapter<AllPendingT
         holder.tv_name.setText("P. Name : " + movie.getName() );
         holder.tv_payment_details.setText("Trans ID : " + movie.getPayment_details() );
         holder.tv_amount.setText("" + movie.getAmount()+CURRENCY_USD_SIGN );
-        if (movie.getType()!=null&&movie.getType().length()>0 &&movie.getType().equals("null")) {
-            holder.tv_type.setText("View Photos" );
+        //movie.getType()!=null&ç>5
+        if (movie.getType().length()>5 ) {
+            holder.tv_type.setText("View Photo" );
             holder.tv_type.setTextColor(context.getResources().getColor(R.color.colorPrimary));
             holder.tv_type.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -100,6 +101,12 @@ public class AllPendingTransListAdapter extends RecyclerView.Adapter<AllPendingT
         }else {
             holder.tv_type.setText("No Photos" );
             holder.tv_type.setTextColor(context.getResources().getColor(R.color.textText));
+            holder.tv_type.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
 
         }
         holder.tv_approve.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +120,20 @@ public class AllPendingTransListAdapter extends RecyclerView.Adapter<AllPendingT
                         //Toast.makeText(context,response.getMessage(), Toast.LENGTH_SHORT).show();
                         onStateChange.onChanged();
 
-                        Api.getInstance().appNotification(movie.getPid(), "Payment Confirmed", "Your pending transaction has been verified", "pending_payment", null, "a", new ApiListener.NotificationSentListener() {
+                        Api.getInstance().appNotification(movie.getPid(), "Payment Confirmed", "Your pending transaction has been verified", "pending_payment", null, "p", new ApiListener.NotificationSentListener() {
+                            @Override
+                            public void onNotificationSentSuccess(JsonElement status) {
+                                Toast.makeText(context, ""+status.toString(), Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            @Override
+                            public void onNotificationSentFailed(String msg) {
+                                //  Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+                        Api.getInstance().appNotification(movie.getDid(),  "New "+movie.getPayment_details(), "Your have a new "+movie.getPayment_details()+" with varified payment", "appointment", null, "d", new ApiListener.NotificationSentListener() {
                             @Override
                             public void onNotificationSentSuccess(JsonElement status) {
                                 Toast.makeText(context, ""+status.toString(), Toast.LENGTH_SHORT).show();

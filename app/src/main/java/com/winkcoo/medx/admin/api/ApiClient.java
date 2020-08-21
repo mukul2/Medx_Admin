@@ -12,6 +12,7 @@ public class ApiClient {
 
     //private static final String BASE_URL = "http://app.abettahealth.com/api/";
     private static final String BASE_URL = "http://medx.winkcoo.com/api/";
+    //private static final String BASE_URL = "http://telemedicine.drshahidulislam.com/api/";
     private static Retrofit retrofit = null;
 
     private static Retrofit getClient() {
